@@ -8,6 +8,12 @@ server:
     context-path: /api
 
 spring:
+  # profiles:
+  #  active: local
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
   application:
     name: vision-picture-backend
   # 数据源配置
@@ -18,6 +24,7 @@ spring:
     password: 12541
 
   # MyBatis-Plus 配置
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: false  # 自动驼峰转换
@@ -40,9 +47,13 @@ knife4j:
           - com.vision.visionpicturebackend.controller
 # 对象存储配置（需要从腾讯云获取）
 cos:
-  client:
-    host: https://vision-1352574006.cos.ap-shanghai.myqcloud.com
-    secretId: AKIDnzNiwynAVigeWJuIXdYGpFTUM4cbSBvW
-    secretKey: Xw8A4mIerthJuOk8Xs44vfQ4Z1LZdWEm
-    region: ap-shanghai
-    bucket: vision-1352574006
+ client:
+  host: https://vision-1352574006.cos.ap-shanghai.myqcloud.com
+  secretId: AKIDnzNiwynAVigeWJuIXdYGpFTUM4cbSBvW
+  secretKey: Xw8A4mIerthJuOk8Xs44vfQ4Z1LZdWEm
+  region: ap-shanghai
+  bucket: vision-1352574006
+
+
+
+

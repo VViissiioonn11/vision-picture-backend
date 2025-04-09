@@ -8,6 +8,8 @@ server:
   context-path: /api
 
 spring:
+ profiles:
+  active: local
  servlet:
   multipart:
    max-file-size: 20MB
@@ -42,14 +44,6 @@ knife4j:
     api-rule: package
     api-rule-resources:
      - com.vision.visionpicturebackend.controller
-# 对象存储配置（需要从腾讯云获取）
-cos:
- client:
-  host: https://vision-1352574006.cos.ap-shanghai.myqcloud.com
-  secretId: AKIDnzNiwynAVigeWJuIXdYGpFTUM4cbSBvW
-  secretKey: Xw8A4mIerthJuOk8Xs44vfQ4Z1LZdWEm
-  region: ap-shanghai
-  bucket: vision-1352574006
 
 
 

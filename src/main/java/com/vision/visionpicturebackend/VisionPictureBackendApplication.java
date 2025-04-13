@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VisionPictureBackendApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(VisionPictureBackendApplication.class, args);
     }
 

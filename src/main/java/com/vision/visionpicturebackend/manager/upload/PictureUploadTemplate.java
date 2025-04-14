@@ -106,5 +106,15 @@ public abstract class PictureUploadTemplate {
         if (!deleteResult) {  
             log.error("file delete error, filepath = {}", file.getAbsolutePath());  
         }  
-    }  
+    }
+
+    public String getSuffixFromContentType(String contentType) {
+        switch(contentType){
+            case "image/jpeg":return "jpeg";
+            case "image/png":return "png";
+            case "image/gif":return "gif";
+            case "image/webp":return "webp";
+            default: return "";
+        }
+    }
 }

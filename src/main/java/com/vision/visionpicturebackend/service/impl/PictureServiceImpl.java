@@ -286,7 +286,7 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         Integer count = pictureUploadByBatchRequest.getCount();
         ThrowUtils.throwIf(count > 30, ErrorCode.PARAMS_ERROR, "最多 30 条");
         String namePrefix = pictureUploadByBatchRequest.getNamePrefix();
-        if(StrUtil.isNotBlank(namePrefix)){
+        if(StrUtil.isBlank(namePrefix)){
             namePrefix=searchText;
         }
         // 要抓取的地址

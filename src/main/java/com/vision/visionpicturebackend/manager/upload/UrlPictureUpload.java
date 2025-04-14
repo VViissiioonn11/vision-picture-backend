@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class UrlPictureUpload extends PictureUploadTemplate {  
     @Override  
-    protected void validPicture(Object inputSource) {  
+    protected void validPicture(Object inputSource) {
         String fileUrl = (String) inputSource;
         ThrowUtils.throwIf(StrUtil.isBlank(fileUrl), ErrorCode.PARAMS_ERROR, "文件地址不能为空");
 
@@ -67,13 +67,28 @@ public class UrlPictureUpload extends PictureUploadTemplate {
                 response.close();
             }
         }
-    }  
+    }
   
     @Override  
     protected String getOriginFilename(Object inputSource) {  
         String fileUrl = (String) inputSource;  
-        // 从 URL 中提取文件名  
-        return FileUtil.mainName(fileUrl);
+        // 从 URL 中提取文件名
+        String fileName = FileUtil.getName(fileUrl);
+        HttpResponse response = null;
+        try {
+            response = HttpUtil.createRequest(Method.HEAD, fileUrl).execute();
+            // 未正常返回，无需执行其他判断
+            if (response.getStatus() == HttpStatus.HTTP_OK) {
+                String contentType = response.header("Content-Type");
+                fileName=fileName+"."+super.getSuffixFromContentType(contentType);
+            }
+            return fileName;
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+            return fileName;
+        }
     }  
   
     @Override  

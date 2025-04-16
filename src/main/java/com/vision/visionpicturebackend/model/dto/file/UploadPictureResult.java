@@ -24,6 +24,10 @@ public class UploadPictureResult {
      * 图片宽度
      */
     private int picWidth;
+    /**
+     * 缩略图 url
+     */
+    private String thumbnailUrl;
 
     /**
      * 图片高度

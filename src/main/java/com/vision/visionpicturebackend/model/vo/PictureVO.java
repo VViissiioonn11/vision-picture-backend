@@ -16,6 +16,10 @@ public class PictureVO implements Serializable {
      * id
      */
     private Long id;
+    /**
+     * 缩略图 url
+     */
+    private String thumbnailUrl;
 
     /**
      * 图片 url

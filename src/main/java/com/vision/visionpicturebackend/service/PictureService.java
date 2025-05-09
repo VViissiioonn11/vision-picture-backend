@@ -2,10 +2,7 @@ package com.vision.visionpicturebackend.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.vision.visionpicturebackend.model.dto.picture.PictureQueryRequest;
-import com.vision.visionpicturebackend.model.dto.picture.PictureReviewRequest;
-import com.vision.visionpicturebackend.model.dto.picture.PictureUploadByBatchRequest;
-import com.vision.visionpicturebackend.model.dto.picture.PictureUploadRequest;
+import com.vision.visionpicturebackend.model.dto.picture.*;
 import com.vision.visionpicturebackend.model.entity.Picture;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.vision.visionpicturebackend.model.entity.User;
@@ -45,5 +42,11 @@ public interface PictureService extends IService<Picture> {
             PictureUploadByBatchRequest pictureUploadByBatchRequest,
             User loginUser
     );
+    //删除图片
+    void deletePicture(long pictureId, User loginUser);
 
+    //校验空间图片权限
+    void checkPictureAuth(User loginUser,Picture picture);
+    //编辑图片
+    void editPicture(PictureEditRequest pictureEditRequest, User loginUser);
 }

@@ -58,7 +58,12 @@ public abstract class PictureUploadTemplate {
             List<CIObject> objectList = processResults.getObjectList();
             if(CollUtil.isNotEmpty(objectList)) {
                 CIObject compressedCiObject = objectList.get(0);
-                return buildResult(originFilename,compressedCiObject);
+                CIObject thumbnailCiObject = compressedCiObject;
+                if(objectList.size() > 1) {
+                    thumbnailCiObject = objectList.get(1);
+                }
+
+                return buildResult(originFilename,compressedCiObject,thumbnailCiObject);
 
             }
             // 5. 封装返回结果  
@@ -72,7 +77,7 @@ public abstract class PictureUploadTemplate {
         }  
     }
 
-    private UploadPictureResult buildResult(String originFilename, CIObject compressedCiObject) {
+    private UploadPictureResult buildResult(String originFilename, CIObject compressedCiObject,CIObject thumbnailCiObject) {
         UploadPictureResult uploadPictureResult = new UploadPictureResult();
         int picWidth = compressedCiObject.getWidth();
         int picHeight = compressedCiObject.getHeight();
@@ -85,6 +90,7 @@ public abstract class PictureUploadTemplate {
         uploadPictureResult.setPicSize(compressedCiObject.getSize().longValue());
         // 设置图片为压缩后的地址
         uploadPictureResult.setUrl(cosClientConfig.getHost() + "/" + compressedCiObject.getKey());
+        uploadPictureResult.setThumbnailUrl(cosClientConfig.getHost() + "/" + thumbnailCiObject.getKey());
         return uploadPictureResult;
     }
 
@@ -131,7 +137,7 @@ public abstract class PictureUploadTemplate {
         boolean deleteResult = file.delete();  
         if (!deleteResult) {  
             log.error("file delete error, filepath = {}", file.getAbsolutePath());  
-        }  
+        }
     }
 
     public String getSuffixFromContentType(String contentType) {

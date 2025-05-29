@@ -13,6 +13,7 @@ import com.vision.visionpicturebackend.exception.ThrowUtils;
 import com.vision.visionpicturebackend.model.dto.space.*;
 import com.vision.visionpicturebackend.model.entity.Space;
 import com.vision.visionpicturebackend.model.entity.User;
+import com.vision.visionpicturebackend.model.enums.SpaceLevelEnum;
 import com.vision.visionpicturebackend.model.vo.SpaceVO;
 import com.vision.visionpicturebackend.service.SpaceService;
 import com.vision.visionpicturebackend.service.UserService;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -38,6 +40,19 @@ public class SpaceController {
 
     @Autowired
     SpaceService spaceService;
+
+    @GetMapping("/list/level")
+    public BaseResponse<List<SpaceLevel>> listSpaceLevel() {
+        List<SpaceLevel> spaceLevelList = Arrays.stream(SpaceLevelEnum.values()) // 获取所有枚举
+                .map(spaceLevelEnum -> new SpaceLevel(
+                        spaceLevelEnum.getValue(),
+                        spaceLevelEnum.getText(),
+                        spaceLevelEnum.getMaxCount(),
+                        spaceLevelEnum.getMaxSize()))
+                .collect(Collectors.toList());
+        return ResultUtils.success(spaceLevelList);
+    }
+
 
     @PostMapping("/add")
     public BaseResponse<Long> addSpace(@RequestBody SpaceAddRequest spaceAddRequest,HttpServletRequest request) {

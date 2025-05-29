@@ -84,7 +84,6 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
                     }
             );
             return Optional.ofNullable(newSpaceId).orElse(-1L);
-
         }
 
     }

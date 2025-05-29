@@ -43,8 +43,6 @@ public class UserController {
         return ResultUtils.success(result);
 
     }
-
-
     @PostMapping("/login")
     public BaseResponse<LoginUserVO> userLogin(@RequestBody UserLoginRequest UserLoginRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(UserLoginRequest==null, ErrorCode.PARAMS_ERROR);
@@ -76,15 +74,6 @@ public class UserController {
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Long> addUser(@RequestBody UserAddRequest UserAddRequest) {
         ThrowUtils.throwIf(UserAddRequest==null, ErrorCode.PARAMS_ERROR);
-//        User user=new User();
-//        BeanUtils.copyProperties(UserAddRequest, user);
-//        final String DEFAULT_PASSWORD="123456";
-//        String encryptPassword=userService.getEncryptPassword(DEFAULT_PASSWORD);
-//        user.setUserPassword(encryptPassword);
-//        Boolean result = userService.save(user);
-//        if(!result){
-//            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-//        }
         Long result=userService.adminAddUser(UserAddRequest);
         log.info("管理员添加用户：{}", result);
         return ResultUtils.success(result);

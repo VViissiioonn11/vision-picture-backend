@@ -47,7 +47,7 @@ public abstract class PictureUploadTemplate {
         File file = null;  
         try {  
             // 3. 创建临时文件  
-            file = File.createTempFile(uploadPath, null);
+            file = File.createTempFile(uploadPath, FileUtil.getSuffix(originFilename));
             // 处理文件来源（本地或 URL）  
             processFile(inputSource, file);  
   

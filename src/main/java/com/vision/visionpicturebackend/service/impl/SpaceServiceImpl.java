@@ -70,7 +70,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
         String lock =String.valueOf(userId).intern();
         synchronized (lock) {
             Long newSpaceId= transactionTemplate.execute(status -> {
-                        //判断是否有空间
+                //判断是否有空间
                 boolean exists =this.lambdaQuery()
                         .eq(Space::getUserId,userId)
                         .exists();

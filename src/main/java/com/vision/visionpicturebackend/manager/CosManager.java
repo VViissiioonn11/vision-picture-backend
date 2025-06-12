@@ -71,21 +71,14 @@ public class CosManager {
         compressRule.setFileId(webpKey);
         rules.add(compressRule);
         //缩略图处理
-        if(file.length()>2*1024){
-            PicOperations.Rule thumbnailRule = new PicOperations.Rule();
-            thumbnailRule.setBucket(cosClientConfig.getBucket());
-            String thumbKey= FileUtil.mainName(key)+"_thumb."+FileUtil.getSuffix(key);
-            thumbnailRule.setFileId(thumbKey);
-            thumbnailRule.setRule(String.format("imageMogr2/thumbnail/%sx%s>",128,128));
-            rules.add(thumbnailRule);
-        }
-
-
-
-
-
-
-
+//        if(file.length()>2*1024){
+//            PicOperations.Rule thumbnailRule = new PicOperations.Rule();
+//            thumbnailRule.setBucket(cosClientConfig.getBucket());
+//            String thumbKey= FileUtil.mainName(key)+"_thumb."+FileUtil.getSuffix(key);
+//            thumbnailRule.setFileId(thumbKey);
+//            thumbnailRule.setRule(String.format("imageMogr2/thumbnail/%sx%s>",128,128));
+//            rules.add(thumbnailRule);
+//        }
 
         // 构造处理参数
         picOperations.setRules(rules);
